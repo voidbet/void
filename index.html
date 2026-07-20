@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="description" content="VOID — Enter the Void. Luck Lives Here. Provably fair Web3 casino. Built on Robinhood.">
+<meta property="og:title" content="VOID — Enter the Void">
+<meta property="og:description" content="Luck Lives Here. Beyond Probability. Built on Robinhood.">
+<title>VOID — Enter the Void</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #000000;
+    --dark: #030503;
+    --panel: #070B07;
+    --card: #0B110B;
+    --border: rgba(74,255,60,0.12);
+    --border-hover: rgba(74,255,60,0.4);
+    --green: #4AFF3C;          /* VOID signature glow green (from logo) */
+    --green-bright: #7CFF6B;
+    --green-deep: #22C217;
+    --green-core: #0D8C05;
+    --white: #E8FFE5;
+    --muted: rgba(180,255,170,0.5);
+    --muted-dim: rgba(180,255,170,0.3);
+    --glow: 0 0 30px rgba(74,255,60,0.3);
+    --glow-lg: 0 0 70px rgba(74,255,60,0.45);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Sora', sans-serif; background: var(--black); color: var(--white);
+    overflow-x: hidden; -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--green-deep); border-radius: 4px; }
+  a { text-decoration: none; color: inherit; }
+
+  #cosmos { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+  /* ══════ VOID ORB LOGO (matches uploaded logo exactly) ══════ */
+  .void-orb { display: block; }
+  .void-orb .ring-outer { animation: ringPulse 3s ease-in-out infinite; transform-origin: center; }
+  @keyframes ringPulse {
+    0%,100% { opacity: 0.85; }
+    50% { opacity: 1; }
+  }
+  .void-orb .eye { animation: eyeGlow 2.6s ease-in-out infinite; }
+  @keyframes eyeGlow {
+    0%,100% { opacity: 0.9; }
+    50% { opacity: 1; filter: brightness(1.3); }
+  }
+
+  /* ══════ NAV ══════ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; gap: 16px; padding: 14px 28px;
+    background: rgba(0,0,0,0.7); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { display: flex; align-items: center; gap: 11px; }
+  .logo-text {
+    font-size: 21px; font-weight: 800; letter-spacing: 0.24em;
+    color: var(--white); text-shadow: 0 0 20px rgba(74,255,60,0.4);
+  }
+  .nav-links { display: flex; gap: 4px; margin-left: 26px; }
+  .nav-links a {
+    font-size: 13.5px; font-weight: 500; color: var(--muted); padding: 8px 14px;
+    border-radius: 8px; transition: all .2s; letter-spacing: .02em;
+  }
+  .nav-links a:hover { color: var(--green-bright); background: rgba(74,255,60,0.07); }
+  .nav-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  .rh-pill {
+    display: flex; align-items: center; gap: 7px; padding: 6px 13px; border-radius: 20px;
+    background: rgba(74,255,60,0.09); border: 1px solid var(--border);
+    font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--green-bright);
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; justify-content: center;
+    padding: 11px 22px; border-radius: 10px; border: none; cursor: pointer;
+    font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700; transition: all .22s; letter-spacing: .02em;
+  }
+  .btn-primary { background: linear-gradient(135deg, var(--green-deep), var(--green)); color: #001400; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--glow-lg); }
+  .btn-ghost { background: rgba(11,17,11,0.7); border: 1px solid var(--border-hover); color: var(--green-bright); }
+  .btn-ghost:hover { background: rgba(74,255,60,0.09); border-color: var(--green); }
+
+  /* ══════ HERO (recreates the cover banner) ══════ */
+  .hero {
+    position: relative; z-index: 2; min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 110px 24px 70px; overflow: hidden;
+  }
+  /* nebula wisps like cover */
+  .neb {
+    position: absolute; pointer-events: none; z-index: 1; filter: blur(30px); opacity: 0.55;
+  }
+  .neb-1 { top: -5%; left: -8%; width: 45%; height: 60%;
+    background: radial-gradient(ellipse at 40% 40%, rgba(74,255,60,0.25), transparent 65%); }
+  .neb-2 { bottom: -10%; left: 2%; width: 40%; height: 55%;
+    background: radial-gradient(ellipse at 50% 50%, rgba(34,194,23,0.22), transparent 60%); }
+  .neb-3 { top: 8%; right: -6%; width: 42%; height: 65%;
+    background: radial-gradient(ellipse at 60% 40%, rgba(74,255,60,0.2), transparent 62%); }
+
+  .hero-tagline-l, .hero-tagline-r {
+    position: absolute; top: 42%; z-index: 3; display: none;
+  }
+  @media (min-width: 1000px) {
+    .hero-tagline-l, .hero-tagline-r { display: block; }
+    .hero-tagline-l { left: 5%; text-align: left; }
+    .hero-tagline-r { right: 5%; text-align: right; }
+  }
+  .tl-big { font-size: 17px; font-weight: 600; letter-spacing: 0.28em; color: var(--white); text-transform: uppercase; }
+  .tl-sm { font-size: 12px; letter-spacing: 0.22em; color: var(--muted); text-transform: uppercase; margin-top: 8px; }
+  .tl-green { color: var(--green-bright); text-shadow: 0 0 16px rgba(74,255,60,0.5); }
+
+  .launch-badge {
+    display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; border-radius: 30px; margin-bottom: 34px;
+    background: rgba(74,255,60,0.1); border: 1px solid var(--border-hover);
+    font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green-bright);
+    position: relative; z-index: 4; animation: bp 2.5s ease-in-out infinite;
+  }
+  @keyframes bp { 0%,100%{box-shadow:0 0 0 0 rgba(74,255,60,0.25)} 50%{box-shadow:0 0 24px 3px rgba(74,255,60,0.35)} }
+  .bdot { width: 7px; height: 7px; border-radius: 50%; background: var(--green-bright); box-shadow: 0 0 8px var(--green-bright); animation: blink 1.4s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.35} }
+
+  /* Wordmark: V [ORB] I D like cover */
+  .wordmark {
+    position: relative; z-index: 4; display: flex; align-items: center; justify-content: center;
+    gap: clamp(6px, 2vw, 22px); margin-bottom: 26px;
+  }
+  .wm-letter {
+    font-size: clamp(60px, 15vw, 150px); font-weight: 800; line-height: 1; letter-spacing: -0.02em;
+    color: var(--white); text-shadow: 0 0 40px rgba(74,255,60,0.3);
+  }
+  .wm-orb { width: clamp(70px, 16vw, 165px); height: clamp(70px, 16vw, 165px); }
+
+  .hero-sub { position: relative; z-index: 4; font-size: clamp(15px,2.4vw,19px); color: var(--muted); max-width: 540px; margin: 0 auto 12px; line-height: 1.7; }
+  .hero-ticker { position: relative; z-index: 4; font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; color: var(--green-bright); margin-bottom: 34px; letter-spacing: .06em; }
+  .hero-cta { position: relative; z-index: 4; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+
+  /* game icons row like cover bottom */
+  .game-row {
+    position: relative; z-index: 4; display: flex; align-items: center; gap: clamp(14px,3vw,32px); flex-wrap: wrap; justify-content: center;
+    padding: 14px 26px; border-radius: 16px; background: rgba(3,5,3,0.6); border: 1px solid var(--border); backdrop-filter: blur(10px);
+  }
+  .game-chip { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); transition: color .2s; cursor: pointer; }
+  .game-chip:hover { color: var(--green-bright); }
+  .game-chip svg { width: 17px; height: 17px; }
+  .chip-div { width: 1px; height: 16px; background: var(--border); }
+
+  /* TGE countdown */
+  .tge-strip { position: relative; z-index: 4; margin-top: 34px; display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap;
+    padding: 14px 20px; border-radius: 16px; background: rgba(7,11,7,0.7); border: 1px solid var(--border); backdrop-filter: blur(10px); }
+  .tge-label { font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); font-weight: 600; }
+  .tge-time { display: flex; gap: 8px; }
+  .tge-box { min-width: 54px; padding: 8px 10px; border-radius: 10px; text-align: center; background: rgba(74,255,60,0.07); border: 1px solid var(--border); }
+  .tge-num { font-family: 'Space Mono', monospace; font-size: 22px; font-weight: 700; color: var(--green-bright); }
+  .tge-unit { font-size: 9px; text-transform: uppercase; color: var(--muted-dim); letter-spacing: .1em; }
+
+  /* ══════ SECTIONS ══════ */
+  section { position: relative; z-index: 2; padding: 90px 24px; max-width: 1180px; margin: 0 auto; }
+  .sec-head { text-align: center; margin-bottom: 52px; }
+  .sec-kicker { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--green); margin-bottom: 13px; }
+  .sec-title { font-size: clamp(28px,5vw,44px); font-weight: 800; letter-spacing: -.02em; margin-bottom: 13px; }
+  .sec-desc { font-size: 16px; color: var(--muted); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+  .stats-bar { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; max-width: 1000px; margin: 0 auto; }
+  .stat { padding: 26px 20px; border-radius: 18px; text-align: center; background: var(--card); border: 1px solid var(--border); transition: all .25s; }
+  .stat:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: var(--glow); }
+  .stat-num { font-family: 'Space Mono', monospace; font-size: clamp(24px,4vw,34px); font-weight: 700; color: var(--green-bright); margin-bottom: 6px; }
+  .stat-lbl { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+
+  .games-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .game { border-radius: 18px; overflow: hidden; cursor: pointer; background: var(--card); border: 1px solid var(--border); transition: all .3s cubic-bezier(.4,0,.2,1); }
+  .game:hover { transform: translateY(-6px); border-color: var(--border-hover); box-shadow: var(--glow), 0 24px 50px rgba(0,0,0,.6); }
+  .game-vis { height: 150px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: linear-gradient(160deg,#040804,#081008,#040804); }
+  .game-vis::after { content:''; position: absolute; inset: 0; opacity: 0; transition: opacity .3s; background: radial-gradient(ellipse at 50% 85%, rgba(74,255,60,0.22), transparent 70%); }
+  .game:hover .game-vis::after { opacity: 1; }
+  .game-emoji { font-size: 56px; z-index: 2; filter: drop-shadow(0 0 20px rgba(74,255,60,0.5)); transition: transform .3s; }
+  .game:hover .game-emoji { transform: scale(1.12); }
+  .game-body { padding: 16px 18px; display: flex; align-items: center; justify-content: space-between; }
+  .game-name { font-size: 16px; font-weight: 600; }
+  .game-meta { font-size: 11px; color: var(--muted); margin-top: 3px; display: flex; align-items: center; gap: 5px; }
+  .live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green-bright); box-shadow: 0 0 5px var(--green-bright); }
+  .rtp { font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: var(--green); background: rgba(74,255,60,0.09); padding: 4px 9px; border-radius: 7px; border: 1px solid var(--border); }
+  .soon-tag { position: absolute; top: 10px; right: 10px; z-index: 3; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; padding: 3px 8px; border-radius: 5px; background: rgba(74,255,60,0.13); color: var(--green-bright); border: 1px solid var(--border); }
+
+  .feat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+  .feat { padding: 30px 26px; border-radius: 20px; background: var(--card); border: 1px solid var(--border); transition: all .25s; }
+  .feat:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+  .feat-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 18px; background: rgba(74,255,60,0.09); border: 1px solid var(--border); }
+  .feat-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .feat-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  .token-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+    background: linear-gradient(135deg, rgba(7,11,7,0.9), rgba(0,40,2,0.25), rgba(7,11,7,0.9));
+    border: 1px solid var(--border-hover); border-radius: 28px; padding: 46px; }
+  .token-ca { font-family: 'Space Mono', monospace; font-size: 13px; word-break: break-all; background: rgba(74,255,60,0.06); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; color: var(--green-bright); margin: 18px 0; display: flex; align-items: center; gap: 10px; }
+  .copy-btn { margin-left: auto; cursor: pointer; color: var(--muted); flex-shrink: 0; }
+  .copy-btn:hover { color: var(--green-bright); }
+  .token-meta { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-top: 22px; }
+  .token-meta-item { padding: 14px 16px; border-radius: 12px; background: rgba(74,255,60,0.04); border: 1px solid var(--border); }
+  .token-meta-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 4px; }
+  .token-meta-val { font-size: 17px; font-weight: 700; color: var(--green-bright); font-family: 'Space Mono', monospace; }
+  .virtuals-card { text-align: center; padding: 40px 30px; background: rgba(3,5,3,0.6); border: 1px solid var(--border); border-radius: 22px; }
+  .virtuals-logo { font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  .virtuals-badge { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 14px; margin-bottom: 8px; background: rgba(74,255,60,0.09); border: 1px solid var(--border-hover); font-size: 22px; font-weight: 800; color: var(--green-bright); }
+
+  .roadmap { max-width: 800px; margin: 0 auto; position: relative; }
+  .roadmap::before { content: ''; position: absolute; left: 24px; top: 12px; bottom: 12px; width: 2px; background: linear-gradient(to bottom, var(--green), transparent); }
+  .road-item { display: flex; gap: 22px; margin-bottom: 34px; position: relative; }
+  .road-dot { width: 50px; height: 50px; border-radius: 14px; flex-shrink: 0; z-index: 2; display: flex; align-items: center; justify-content: center; font-size: 22px; background: var(--card); border: 1px solid var(--border-hover); }
+  .road-item.done .road-dot { background: rgba(74,255,60,0.13); box-shadow: var(--glow); }
+  .road-phase { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: 5px; }
+  .road-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .road-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .road-status { display: inline-block; margin-top: 8px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; padding: 3px 9px; border-radius: 5px; }
+  .status-live { background: rgba(74,255,60,0.14); color: var(--green-bright); }
+  .status-soon { background: rgba(180,255,170,0.08); color: var(--muted); }
+
+  .final-cta { text-align: center; padding: 80px 40px; border-radius: 32px; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, rgba(0,40,2,0.3), rgba(7,11,7,0.9), rgba(0,40,2,0.3)); border: 1px solid var(--border-hover); }
+  .final-cta h2 { font-size: clamp(30px,6vw,54px); font-weight: 800; letter-spacing: -.02em; margin-bottom: 16px; }
+
+  footer { position: relative; z-index: 2; border-top: 1px solid var(--border); padding: 40px 24px; text-align: center; }
+  .foot-socials { display: flex; gap: 14px; justify-content: center; margin-bottom: 20px; }
+  .foot-social { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: var(--card); border: 1px solid var(--border); color: var(--muted); transition: all .2s; }
+  .foot-social:hover { color: var(--green-bright); border-color: var(--border-hover); transform: translateY(-2px); }
+  .foot-note { font-size: 13px; color: var(--muted-dim); }
+  .foot-disclaimer { font-size: 11px; color: var(--muted-dim); max-width: 600px; margin: 16px auto 0; line-height: 1.6; }
+
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); z-index: 500; padding: 12px 20px; border-radius: 12px; background: var(--card); border: 1px solid var(--border-hover); font-size: 13px; font-weight: 600; color: var(--green-bright); opacity: 0; transition: all .3s; box-shadow: var(--glow); }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  @media (max-width: 900px) {
+    .stats-bar { grid-template-columns: repeat(2,1fr); }
+    .games-grid { grid-template-columns: repeat(2,1fr); }
+    .feat-grid { grid-template-columns: 1fr; }
+    .token-wrap { grid-template-columns: 1fr; padding: 30px; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 560px) {
+    nav { padding: 12px 16px; }
+    section { padding: 62px 18px; }
+    .games-grid { grid-template-columns: repeat(2,1fr); gap: 12px; }
+    .game-vis { height: 120px; } .game-emoji { font-size: 44px; }
+    .hero-cta { flex-direction: column; width: 100%; } .hero-cta .btn { width: 100%; }
+    .rh-pill span { display: none; }
+    .wordmark { gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="cosmos"></canvas>
+
+<!-- ══════ REUSABLE ORB LOGO (SVG matches uploaded logo) ══════ -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <radialGradient id="orbCore" cx="50%" cy="52%" r="55%">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="70%" stop-color="#050505"/>
+      <stop offset="100%" stop-color="#000"/>
+    </radialGradient>
+    <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7CFF6B"/>
+      <stop offset="45%" stop-color="#4AFF3C"/>
+      <stop offset="100%" stop-color="#0D8C05"/>
+    </linearGradient>
+    <filter id="ringBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="eyeBlur" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+</svg>
+
+<template id="orbTpl">
+  <svg class="void-orb" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- outer glow halo -->
+    <circle cx="50" cy="50" r="46" fill="#4AFF3C" opacity="0.06"/>
+    <!-- bright outer ring -->
+    <circle class="ring-outer" cx="50" cy="50" r="40" stroke="url(#ringGrad)" stroke-width="3.5" fill="none" filter="url(#ringBlur)"/>
+    <!-- dark sphere body -->
+    <circle cx="50" cy="50" r="36" fill="url(#orbCore)"/>
+    <!-- inner curved ring (the alien-hood arc) -->
+    <path d="M32 52 a18 18 0 1 1 36 0" stroke="#3fdd33" stroke-width="2.6" fill="none" opacity="0.85" stroke-linecap="round"/>
+    <path d="M34 54 a16 16 0 1 0 32 0" stroke="#1a5c14" stroke-width="2" fill="none" opacity="0.6"/>
+    <!-- two glowing eyes -->
+    <circle class="eye" cx="43" cy="50" r="3.4" fill="#B9FFB0" filter="url(#eyeBlur)"/>
+    <circle class="eye" cx="57" cy="50" r="3.4" fill="#B9FFB0" filter="url(#eyeBlur)"/>
+  </svg>
+</template>
+
+<!-- ══════ NAV ══════ -->
+<nav>
+  <div class="logo">
+    <span class="orb-mount" style="width:34px;height:34px;display:block;"></span>
+    <span class="logo-text">VOID</span>
+  </div>
+  <div class="nav-links">
+    <a href="#games">Games</a>
+    <a href="#token">$VOID</a>
+    <a href="#fairness">Fairness</a>
+    <a href="#roadmap">Roadmap</a>
+  </div>
+  <div class="nav-right">
+    <div class="rh-pill">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 20c0-8 6-14 14-14v3c-6 0-10 4-10 11H4z" fill="#4AFF3C"/><path d="M8 20c0-5 4-8 9-8v2.5c-3.5 0-6.5 2-6.5 5.5H8z" fill="#7CFF6B"/></svg>
+      <span>Built on Robinhood</span>
+    </div>
+    <a href="#token" class="btn btn-primary" style="padding:9px 18px;">Buy $VOID</a>
+  </div>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<header class="hero">
+  <div class="neb neb-1"></div>
+  <div class="neb neb-2"></div>
+  <div class="neb neb-3"></div>
+
+  <div class="hero-tagline-l">
+    <div class="tl-big">Enter the Void</div>
+    <div class="tl-sm">Luck Lives Here</div>
+  </div>
+  <div class="hero-tagline-r">
+    <div class="tl-big tl-green">Built on Robinhood</div>
+    <div class="tl-sm">Beyond Probability</div>
+  </div>
+
+  <div class="launch-badge"><span class="bdot"></span>Launching Today · Virtuals.io</div>
+
+  <div class="wordmark">
+    <span class="wm-letter">V</span>
+    <span class="orb-mount wm-orb"></span>
+    <span class="wm-letter">I</span>
+    <span class="wm-letter">D</span>
+  </div>
+
+  <p class="hero-sub">The first provably-fair Web3 casino built on Robinhood. Every bet verifiable on-chain. No accounts — connect and play.</p>
+  <div class="hero-ticker">$VOID · Where Odds Collapse</div>
+
+  <div class="hero-cta">
+    <a href="#token" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20M2 12h20"/></svg>
+      Buy $VOID on Virtuals
+    </a>
+    <a href="#games" class="btn btn-ghost">Explore Games →</a>
+  </div>
+
+  <!-- game chips row (matches cover) -->
+  <div class="game-row">
+    <div class="game-chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+      Crash
+    </div>
+    <div class="chip-div"></div>
+    <div class="game-chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Mines
+    </div>
+    <div class="chip-div"></div>
+    <div class="game-chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><circle cx="6" cy="15" r="2"/><circle cx="18" cy="15" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+      Plinko
+    </div>
+    <div class="chip-div"></div>
+    <div class="game-chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l7-7 7 7-7 7z"/><path d="M9 12l3-3 3 3-3 3z" fill="currentColor"/></svg>
+      Dino
+    </div>
+  </div>
+
+  <div class="tge-strip">
+    <span class="tge-label">Token Launch</span>
+    <div class="tge-time">
+      <div class="tge-box"><div class="tge-num" id="cd-h">00</div><div class="tge-unit">Hrs</div></div>
+      <div class="tge-box"><div class="tge-num" id="cd-m">00</div><div class="tge-unit">Min</div></div>
+      <div class="tge-box"><div class="tge-num" id="cd-s">00</div><div class="tge-unit">Sec</div></div>
+    </div>
+    <span class="tge-label" style="color:var(--green-bright);">→ Site live after TGE</span>
+  </div>
+</header>
+
+<!-- ══════ STATS ══════ -->
+<section style="padding-top:40px;">
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-num">4</div><div class="stat-lbl">Provably Fair Games</div></div>
+    <div class="stat"><div class="stat-num">99%</div><div class="stat-lbl">RTP Average</div></div>
+    <div class="stat"><div class="stat-num">1%</div><div class="stat-lbl">House Edge</div></div>
+    <div class="stat"><div class="stat-num">0</div><div class="stat-lbl">Sign-ups Required</div></div>
+  </div>
+</section>
+
+<!-- ══════ GAMES ══════ -->
+<section id="games">
+  <div class="sec-head">
+    <span class="sec-kicker">VOID Originals</span>
+    <h2 class="sec-title">Four Ways to Collapse the Odds</h2>
+    <p class="sec-desc">Every game runs on a backend-authoritative provably-fair engine. Cryptographically verifiable — never trust, always verify.</p>
+  </div>
+  <div class="games-grid">
+    <div class="game">
+      <div class="game-vis"><span class="game-emoji">📈</span></div>
+      <div class="game-body"><div><div class="game-name">Crash</div><div class="game-meta"><span class="live-dot"></span>Live at launch</div></div><div class="rtp">99%</div></div>
+    </div>
+    <div class="game">
+      <div class="game-vis"><span class="soon-tag">Soon</span><span class="game-emoji">💣</span></div>
+      <div class="game-body"><div><div class="game-name">Mines</div><div class="game-meta"><span class="live-dot"></span>Phase 2</div></div><div class="rtp">99%</div></div>
+    </div>
+    <div class="game">
+      <div class="game-vis"><span class="soon-tag">Soon</span><span class="game-emoji">🎯</span></div>
+      <div class="game-body"><div><div class="game-name">Plinko</div><div class="game-meta"><span class="live-dot"></span>Phase 2</div></div><div class="rtp">99%</div></div>
+    </div>
+    <div class="game">
+      <div class="game-vis"><span class="soon-tag">Soon</span><span class="game-emoji">🦕</span></div>
+      <div class="game-body"><div><div class="game-name">Dino</div><div class="game-meta"><span class="live-dot"></span>Phase 3</div></div><div class="rtp">99%</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FEATURES ══════ -->
+<section id="fairness">
+  <div class="sec-head">
+    <span class="sec-kicker">Why VOID</span>
+    <h2 class="sec-title">Built Different</h2>
+    <p class="sec-desc">This isn't a casino that happens to be Web3. It's Web3 that happens to be a casino.</p>
+  </div>
+  <div class="feat-grid">
+    <div class="feat"><div class="feat-icon">🔐</div><div class="feat-title">Provably Fair</div><div class="feat-desc">Every outcome derived from HMAC-SHA256: server seed + client seed + nonce. Verify any bet, anytime. Seeds revealed after rotation.</div></div>
+    <div class="feat"><div class="feat-icon">⚡</div><div class="feat-title">Non-Custodial First</div><div class="feat-desc">Connect your wallet and play. No email, no entry gates, no waiting. Your keys, your game, your winnings in real crypto.</div></div>
+    <div class="feat"><div class="feat-icon">🪶</div><div class="feat-title">Built on Robinhood</div><div class="feat-desc">Powered by the Robinhood ecosystem for fast, low-cost transactions. Deposits, plays, and payouts settle on-chain.</div></div>
+    <div class="feat"><div class="feat-icon">📡</div><div class="feat-title">Real-Time Multiplayer</div><div class="feat-desc">Backend-authoritative game loops synced over WebSocket. Live bet feed, leaderboard, ride the crash together.</div></div>
+    <div class="feat"><div class="feat-icon">🎁</div><div class="feat-title">$VOID Rewards</div><div class="feat-desc">Rakeback, VIP tiers, and tournament pools paid in $VOID. The more you play, the more the void gives back.</div></div>
+    <div class="feat"><div class="feat-icon">📱</div><div class="feat-title">Mobile Native</div><div class="feat-desc">Installable PWA. Touch-first controls, safe-area support, 60fps animations. Premium casino in your pocket.</div></div>
+  </div>
+</section>
+
+<!-- ══════ TOKEN ══════ -->
+<section id="token">
+  <div class="sec-head">
+    <span class="sec-kicker">The Token</span>
+    <h2 class="sec-title">$VOID</h2>
+    <p class="sec-desc">The native token powering the VOID ecosystem. Launching today on Virtuals.io.</p>
+  </div>
+  <div class="token-wrap">
+    <div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px;">
+        <span class="orb-mount" style="width:52px;height:52px;display:block;"></span>
+        <div><div style="font-size:26px;font-weight:800;">$VOID</div><div style="font-size:13px;color:var(--muted);">The house token</div></div>
+      </div>
+      <p style="font-size:15px;color:var(--muted);line-height:1.7;margin-top:14px;">$VOID captures the value flowing through every game — rakeback, VIP rewards, and tournament pools all settle in $VOID. Launching via Virtuals Protocol on Robinhood.</p>
+      <div class="token-ca">
+        <span id="ca-text">CA revealed at TGE — launching today</span>
+        <span class="copy-btn" onclick="copyCA()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+      </div>
+      <div class="token-meta">
+        <div class="token-meta-item"><div class="token-meta-lbl">Network</div><div class="token-meta-val">Robinhood</div></div>
+        <div class="token-meta-item"><div class="token-meta-lbl">Launchpad</div><div class="token-meta-val">Virtuals.io</div></div>
+        <div class="token-meta-item"><div class="token-meta-lbl">Ticker</div><div class="token-meta-val">$VOID</div></div>
+        <div class="token-meta-item"><div class="token-meta-lbl">Launch</div><div class="token-meta-val">Today</div></div>
+      </div>
+    </div>
+    <div class="virtuals-card">
+      <div class="virtuals-logo">Launching On</div>
+      <div class="virtuals-badge">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#4AFF3C" opacity="0.2"/><path d="M8 12l3 3 5-6" stroke="#7CFF6B" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Virtuals.io
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin:16px 0 24px;line-height:1.6;">The autonomous agent launchpad on Robinhood. Fair launch, transparent, community-first.</p>
+      <a href="#" class="btn btn-primary" style="width:100%;" onclick="showToast('Live at TGE — launching today!');return false;">Buy $VOID at Launch</a>
+      <div style="font-size:11px;color:var(--muted-dim);margin-top:14px;">Button activates the moment TGE goes live</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ ROADMAP ══════ -->
+<section id="roadmap">
+  <div class="sec-head">
+    <span class="sec-kicker">The Path</span>
+    <h2 class="sec-title">Roadmap</h2>
+    <p class="sec-desc">Website and app go live the moment $VOID successfully launches.</p>
+  </div>
+  <div class="roadmap">
+    <div class="road-item done"><div class="road-dot">🚀</div><div><div class="road-phase">Phase 0 · Today</div><div class="road-title">Token Generation Event</div><div class="road-desc">$VOID launches on Virtuals.io. Fair launch on Robinhood. Website + Crash go live immediately after successful TGE.</div><span class="road-status status-live">Launching Now</span></div></div>
+    <div class="road-item done"><div class="road-dot">📈</div><div><div class="road-phase">Phase 1 · Launch</div><div class="road-title">Crash Goes Live</div><div class="road-desc">The flagship game. Real-time multiplayer crash with provably-fair results, auto-cashout, and live bet feed.</div><span class="road-status status-live">At TGE</span></div></div>
+    <div class="road-item"><div class="road-dot">💣</div><div><div class="road-phase">Phase 2 · Weeks After</div><div class="road-title">Mines + Plinko</div><div class="road-desc">Two more provably-fair originals. Configurable difficulty, instant cashout, VOID-green theming throughout.</div><span class="road-status status-soon">Coming</span></div></div>
+    <div class="road-item"><div class="road-dot">🏆</div><div><div class="road-phase">Phase 3 · Expansion</div><div class="road-title">Dino, Tournaments & VIP</div><div class="road-desc">Dino runner, weekly tournaments with $VOID prize pools, VIP tiers, rakeback, and the leaderboard economy.</div><span class="road-status status-soon">Planned</span></div></div>
+    <div class="road-item"><div class="road-dot">🌌</div><div><div class="road-phase">Phase 4 · The Ecosystem</div><div class="road-title">PvP, Prediction Markets & AI Agents</div><div class="road-desc">VOID becomes more than a casino — social gambling, PvP duels, prediction markets, autonomous agents playing the void.</div><span class="road-status status-soon">Vision</span></div></div>
+  </div>
+</section>
+
+<!-- ══════ FINAL CTA ══════ -->
+<section>
+  <div class="final-cta">
+    <div class="neb neb-3" style="top:-30%;right:20%;opacity:0.4;"></div>
+    <div class="orb-mount" style="width:80px;height:80px;margin:0 auto 24px;position:relative;z-index:2;"></div>
+    <h2 style="position:relative;z-index:2;">Ready to enter the Void?</h2>
+    <p style="position:relative;z-index:2;font-size:17px;color:var(--muted);max-width:480px;margin:0 auto 32px;">$VOID launches today on Virtuals.io. Site and games go live the moment the token is out.</p>
+    <div style="position:relative;z-index:2;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="#token" class="btn btn-primary">Buy $VOID</a>
+      <a href="https://x.com/voidotxyz" target="_blank" class="btn btn-ghost">Follow @voidotxyz</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer>
+  <div class="logo" style="justify-content:center;margin-bottom:20px;">
+    <span class="orb-mount" style="width:30px;height:30px;display:block;"></span>
+    <span class="logo-text">VOID</span>
+  </div>
+  <div class="foot-socials">
+    <a class="foot-social" href="https://x.com/voidotxyz" target="_blank" title="X / Twitter">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.58-6.63 7.58H.49l8.6-9.83L0 1.15h7.59l5.24 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z"/></svg>
+    </a>
+    <a class="foot-social" href="#" title="Virtuals">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+    </a>
+  </div>
+  <div class="foot-note">© 2026 VOID · Built on Robinhood · Where Odds Collapse ■</div>
+  <div class="foot-disclaimer">VOID is a provably-fair gaming platform. $VOID is a utility token launching via Virtuals.io. Gambling involves risk — play responsibly. This site goes fully live after a successful token launch. Follow <a href="https://x.com/voidotxyz" target="_blank" style="color:var(--green-bright);">@voidotxyz</a> for the CA drop.</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// mount orb logo everywhere
+(function(){
+  const tpl = document.getElementById('orbTpl');
+  document.querySelectorAll('.orb-mount').forEach(m => {
+    m.appendChild(tpl.content.cloneNode(true));
+  });
+})();
+
+// cosmic particles (green)
+(function(){
+  const c=document.getElementById('cosmos'),ctx=c.getContext('2d');let W,H,parts=[];
+  function rs(){W=c.width=innerWidth;H=c.height=innerHeight;}
+  function mk(){const o=Math.random()*0.5+0.1,r=Math.random();return{x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+0.3,vx:(Math.random()-0.5)*0.14,vy:(Math.random()-0.5)*0.14,o,p:Math.random()*6.28,ps:Math.random()*0.02+0.005,col:r>0.7?`rgba(74,255,60,${o})`:r>0.4?`rgba(124,255,107,${o*0.6})`:`rgba(255,255,255,${o*0.35})`};}
+  function neb(){let g=ctx.createRadialGradient(W*0.8,H*0.25,0,W*0.8,H*0.25,W*0.35);g.addColorStop(0,'rgba(74,255,60,0.05)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);let g2=ctx.createRadialGradient(W*0.15,H*0.7,0,W*0.15,H*0.7,W*0.3);g2.addColorStop(0,'rgba(34,194,23,0.04)');g2.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g2;ctx.fillRect(0,0,W,H);}
+  rs();for(let i=0;i<110;i++)parts.push(mk());
+  function loop(){ctx.clearRect(0,0,W,H);neb();for(const p of parts){p.x+=p.vx;p.y+=p.vy;p.p+=p.ps;if(p.x<0||p.x>W||p.y<0||p.y>H)Object.assign(p,mk());const a=0.5+0.5*Math.sin(p.p);ctx.beginPath();ctx.arc(p.x,p.y,p.r*a,0,6.28);ctx.fillStyle=p.col;ctx.fill();}requestAnimationFrame(loop);}
+  loop();addEventListener('resize',rs);
+})();
+
+// countdown to end of today
+(function(){const end=new Date();end.setHours(23,59,59,0);function t(){const n=new Date(),d=Math.max(0,end-n);document.getElementById('cd-h').textContent=String(Math.floor(d/3.6e6)).padStart(2,'0');document.getElementById('cd-m').textContent=String(Math.floor(d%3.6e6/6e4)).padStart(2,'0');document.getElementById('cd-s').textContent=String(Math.floor(d%6e4/1000)).padStart(2,'0');}t();setInterval(t,1000);})();
+
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(window._t);window._t=setTimeout(()=>t.classList.remove('show'),2800);}
+function copyCA(){showToast('CA drops at TGE — follow @voidotxyz');}
+console.log('%cVOID · Built on Robinhood','color:#4AFF3C;font-size:20px;font-weight:800;');
+</script>
+</body>
+</html>
