@@ -4,341 +4,254 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
-<meta name="description" content="VOID — Enter the Void. Luck Lives Here. Provably fair Web3 casino. Built on Robinhood.">
+<meta name="description" content="VOID — Enter the Void. Luck Lives Here. The first provably-fair Web3 casino built on Robinhood. $VOID live on Virtuals.io.">
 <meta name="virtual-protocol-site-verification" content="5734e540457d08ad55f8fef8aed40be5" />
 <meta property="og:title" content="VOID — Enter the Void">
-<meta property="og:description" content="Luck Lives Here. Beyond Probability. Built on Robinhood.">
+<meta property="og:description" content="Luck Lives Here. Beyond Probability. Built on Robinhood. $VOID live on Virtuals.io.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <title>VOID — Enter the Void</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --black: #000000;
-    --dark: #030503;
-    --panel: #070B07;
-    --card: #0B110B;
-    --border: rgba(74,255,60,0.12);
-    --border-hover: rgba(74,255,60,0.4);
-    --green: #4AFF3C;          /* VOID signature glow green (from logo) */
-    --green-bright: #7CFF6B;
-    --green-deep: #22C217;
-    --green-core: #0D8C05;
-    --white: #E8FFE5;
-    --muted: rgba(180,255,170,0.5);
-    --muted-dim: rgba(180,255,170,0.3);
-    --glow: 0 0 30px rgba(74,255,60,0.3);
-    --glow-lg: 0 0 70px rgba(74,255,60,0.45);
+  :root{
+    --black:#000; --dark:#020402; --panel:#060A06; --card:#0A0F0A;
+    --border:rgba(74,255,60,.12); --border-h:rgba(74,255,60,.4);
+    --green:#4AFF3C; --green-bright:#7CFF6B; --green-deep:#22C217; --green-core:#0D8C05; --mint:#B9FFB0;
+    --white:#EAFFE7; --muted:rgba(180,255,170,.52); --muted-dim:rgba(180,255,170,.3);
+    --glow:0 0 30px rgba(74,255,60,.3); --glow-lg:0 0 70px rgba(74,255,60,.45);
   }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Sora', sans-serif; background: var(--black); color: var(--white);
-    overflow-x: hidden; -webkit-font-smoothing: antialiased; line-height: 1.5;
-  }
-  ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: var(--black); }
-  ::-webkit-scrollbar-thumb { background: var(--green-deep); border-radius: 4px; }
-  a { text-decoration: none; color: inherit; }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Sora',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5}
+  ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#000}::-webkit-scrollbar-thumb{background:var(--green-deep);border-radius:4px}
+  a{text-decoration:none;color:inherit}
+  ::selection{background:rgba(74,255,60,.25);color:#fff}
 
-  #cosmos { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  /* grain overlay */
+  body::after{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-  /* ══════ VOID ORB LOGO (matches uploaded logo exactly) ══════ */
-  .void-orb { display: block; }
-  .void-orb .ring-outer { animation: ringPulse 3s ease-in-out infinite; transform-origin: center; }
-  @keyframes ringPulse {
-    0%,100% { opacity: 0.85; }
-    50% { opacity: 1; }
-  }
-  .void-orb .eye { animation: eyeGlow 2.6s ease-in-out infinite; }
-  @keyframes eyeGlow {
-    0%,100% { opacity: 0.9; }
-    50% { opacity: 1; filter: brightness(1.3); }
-  }
+  #cosmos{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .grid-fx{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(rgba(74,255,60,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(74,255,60,.025) 1px,transparent 1px);
+    background-size:48px 48px;mask-image:radial-gradient(ellipse 75% 55% at 50% 0%,#000,transparent 72%);-webkit-mask-image:radial-gradient(ellipse 75% 55% at 50% 0%,#000,transparent 72%)}
 
-  /* ══════ NAV ══════ */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; gap: 16px; padding: 14px 28px;
-    background: rgba(0,0,0,0.7); backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-  }
-  .logo { display: flex; align-items: center; gap: 11px; }
-  .logo-text {
-    font-size: 21px; font-weight: 800; letter-spacing: 0.24em;
-    color: var(--white); text-shadow: 0 0 20px rgba(74,255,60,0.4);
-  }
-  .nav-links { display: flex; gap: 4px; margin-left: 26px; }
-  .nav-links a {
-    font-size: 13.5px; font-weight: 500; color: var(--muted); padding: 8px 14px;
-    border-radius: 8px; transition: all .2s; letter-spacing: .02em;
-  }
-  .nav-links a:hover { color: var(--green-bright); background: rgba(74,255,60,0.07); }
-  .nav-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
-  .rh-pill {
-    display: flex; align-items: center; gap: 7px; padding: 6px 13px; border-radius: 20px;
-    background: rgba(74,255,60,0.09); border: 1px solid var(--border);
-    font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--green-bright);
-  }
+  /* ══ TOP TICKER ══ */
+  .ticker-bar{position:fixed;top:0;left:0;right:0;z-index:101;height:32px;background:rgba(74,255,60,.08);border-bottom:1px solid var(--border);overflow:hidden;display:flex;align-items:center}
+  .ticker-track{display:flex;white-space:nowrap;animation:scroll 26s linear infinite;font-family:'Space Mono',monospace;font-size:12px;color:var(--green-bright);letter-spacing:.05em}
+  .ticker-track span{padding:0 26px;display:inline-flex;align-items:center;gap:8px}
+  .ticker-track span::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green)}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px; justify-content: center;
-    padding: 11px 22px; border-radius: 10px; border: none; cursor: pointer;
-    font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700; transition: all .22s; letter-spacing: .02em;
-  }
-  .btn-primary { background: linear-gradient(135deg, var(--green-deep), var(--green)); color: #001400; }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--glow-lg); }
-  .btn-ghost { background: rgba(11,17,11,0.7); border: 1px solid var(--border-hover); color: var(--green-bright); }
-  .btn-ghost:hover { background: rgba(74,255,60,0.09); border-color: var(--green); }
+  /* ══ NAV ══ */
+  nav{position:fixed;top:32px;left:0;right:0;z-index:100;display:flex;align-items:center;gap:16px;padding:14px 28px;background:rgba(0,0,0,.62);backdrop-filter:blur(22px);border-bottom:1px solid var(--border)}
+  .logo{display:flex;align-items:center;gap:11px}
+  .logo-text{font-size:21px;font-weight:800;letter-spacing:.24em;color:#fff;text-shadow:0 0 20px rgba(74,255,60,.45)}
+  .nav-links{display:flex;gap:2px;margin-left:26px}
+  .nav-links a{font-size:13.5px;font-weight:500;color:var(--muted);padding:8px 14px;border-radius:8px;transition:all .2s}
+  .nav-links a:hover{color:var(--green-bright);background:rgba(74,255,60,.07)}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+  .rh-pill{display:flex;align-items:center;gap:7px;padding:6px 13px;border-radius:20px;background:rgba(74,255,60,.09);border:1px solid var(--border);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-bright)}
 
-  /* ══════ HERO (recreates the cover banner) ══════ */
-  .hero {
-    position: relative; z-index: 2; min-height: 100vh;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; padding: 110px 24px 70px; overflow: hidden;
-  }
-  /* nebula wisps like cover */
-  .neb {
-    position: absolute; pointer-events: none; z-index: 1; filter: blur(30px); opacity: 0.55;
-  }
-  .neb-1 { top: -5%; left: -8%; width: 45%; height: 60%;
-    background: radial-gradient(ellipse at 40% 40%, rgba(74,255,60,0.25), transparent 65%); }
-  .neb-2 { bottom: -10%; left: 2%; width: 40%; height: 55%;
-    background: radial-gradient(ellipse at 50% 50%, rgba(34,194,23,0.22), transparent 60%); }
-  .neb-3 { top: 8%; right: -6%; width: 42%; height: 65%;
-    background: radial-gradient(ellipse at 60% 40%, rgba(74,255,60,0.2), transparent 62%); }
+  .btn{display:inline-flex;align-items:center;gap:8px;justify-content:center;padding:11px 22px;border-radius:11px;border:none;cursor:pointer;font-family:'Sora',sans-serif;font-size:14px;font-weight:700;transition:all .22s;letter-spacing:.02em;position:relative;overflow:hidden}
+  .btn-primary{background:linear-gradient(135deg,var(--green-deep),var(--green));color:#001400}
+  .btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .6s}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:var(--glow-lg)}
+  .btn-primary:hover::after{transform:translateX(120%)}
+  .btn-ghost{background:rgba(10,15,10,.6);border:1px solid var(--border-h);color:var(--green-bright)}
+  .btn-ghost:hover{background:rgba(74,255,60,.09);border-color:var(--green)}
 
-  .hero-tagline-l, .hero-tagline-r {
-    position: absolute; top: 42%; z-index: 3; display: none;
-  }
-  @media (min-width: 1000px) {
-    .hero-tagline-l, .hero-tagline-r { display: block; }
-    .hero-tagline-l { left: 5%; text-align: left; }
-    .hero-tagline-r { right: 5%; text-align: right; }
-  }
-  .tl-big { font-size: 17px; font-weight: 600; letter-spacing: 0.28em; color: var(--white); text-transform: uppercase; }
-  .tl-sm { font-size: 12px; letter-spacing: 0.22em; color: var(--muted); text-transform: uppercase; margin-top: 8px; }
-  .tl-green { color: var(--green-bright); text-shadow: 0 0 16px rgba(74,255,60,0.5); }
+  /* ══ HERO ══ */
+  .hero{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:150px 24px 70px;overflow:hidden}
+  .neb{position:absolute;pointer-events:none;z-index:1;filter:blur(34px);opacity:.55}
+  .neb-1{top:-5%;left:-8%;width:45%;height:60%;background:radial-gradient(ellipse at 40% 40%,rgba(74,255,60,.28),transparent 65%);animation:drift1 20s ease-in-out infinite}
+  .neb-2{bottom:-10%;left:2%;width:40%;height:55%;background:radial-gradient(ellipse at 50% 50%,rgba(34,194,23,.24),transparent 60%);animation:drift2 26s ease-in-out infinite}
+  .neb-3{top:8%;right:-6%;width:42%;height:65%;background:radial-gradient(ellipse at 60% 40%,rgba(74,255,60,.22),transparent 62%);animation:drift1 23s ease-in-out infinite reverse}
+  @keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-20px)}}
+  @keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-25px,25px)}}
 
-  .launch-badge {
-    display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; border-radius: 30px; margin-bottom: 34px;
-    background: rgba(74,255,60,0.1); border: 1px solid var(--border-hover);
-    font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green-bright);
-    position: relative; z-index: 4; animation: bp 2.5s ease-in-out infinite;
-  }
-  @keyframes bp { 0%,100%{box-shadow:0 0 0 0 rgba(74,255,60,0.25)} 50%{box-shadow:0 0 24px 3px rgba(74,255,60,0.35)} }
-  .bdot { width: 7px; height: 7px; border-radius: 50%; background: var(--green-bright); box-shadow: 0 0 8px var(--green-bright); animation: blink 1.4s infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.35} }
+  .hero-tagline-l,.hero-tagline-r{position:absolute;top:44%;z-index:3;display:none}
+  @media(min-width:1050px){.hero-tagline-l,.hero-tagline-r{display:block}.hero-tagline-l{left:5%;text-align:left}.hero-tagline-r{right:5%;text-align:right}}
+  .tl-big{font-size:16px;font-weight:600;letter-spacing:.28em;color:#fff;text-transform:uppercase}
+  .tl-sm{font-size:11px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin-top:8px}
+  .tl-green{color:var(--green-bright);text-shadow:0 0 16px rgba(74,255,60,.5)}
 
-  /* Wordmark: V [ORB] I D like cover */
-  .wordmark {
-    position: relative; z-index: 4; display: flex; align-items: center; justify-content: center;
-    gap: clamp(6px, 2vw, 22px); margin-bottom: 26px;
-  }
-  .wm-letter {
-    font-size: clamp(60px, 15vw, 150px); font-weight: 800; line-height: 1; letter-spacing: -0.02em;
-    color: var(--white); text-shadow: 0 0 40px rgba(74,255,60,0.3);
-  }
-  .wm-orb { width: clamp(70px, 16vw, 165px); height: clamp(70px, 16vw, 165px); }
+  .live-badge{display:inline-flex;align-items:center;gap:9px;padding:8px 18px;border-radius:30px;margin-bottom:34px;background:rgba(74,255,60,.1);border:1px solid var(--border-h);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--green-bright);position:relative;z-index:4;animation:bp 2.5s ease-in-out infinite}
+  @keyframes bp{0%,100%{box-shadow:0 0 0 0 rgba(74,255,60,.3)}50%{box-shadow:0 0 26px 3px rgba(74,255,60,.4)}}
+  .bdot{width:8px;height:8px;border-radius:50%;background:var(--green-bright);box-shadow:0 0 10px var(--green-bright);animation:blink 1.2s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
-  .hero-sub { position: relative; z-index: 4; font-size: clamp(15px,2.4vw,19px); color: var(--muted); max-width: 540px; margin: 0 auto 12px; line-height: 1.7; }
-  .hero-ticker { position: relative; z-index: 4; font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; color: var(--green-bright); margin-bottom: 34px; letter-spacing: .06em; }
-  .hero-cta { position: relative; z-index: 4; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+  .wordmark{position:relative;z-index:4;display:flex;align-items:center;justify-content:center;gap:clamp(6px,2vw,22px);margin-bottom:26px}
+  .wm-letter{font-size:clamp(60px,15vw,155px);font-weight:800;line-height:1;letter-spacing:-.02em;color:#fff;text-shadow:0 0 40px rgba(74,255,60,.3);animation:wmIn 1s cubic-bezier(.34,1.56,.64,1) backwards}
+  .wm-letter:nth-child(1){animation-delay:.1s}
+  .wm-letter:nth-child(3){animation-delay:.4s}
+  .wm-letter:nth-child(4){animation-delay:.5s}
+  @keyframes wmIn{from{opacity:0;transform:translateY(40px) scale(.8);filter:blur(10px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+  .wm-orb{width:clamp(70px,16vw,170px);height:clamp(70px,16vw,170px);animation:wmIn 1s cubic-bezier(.34,1.56,.64,1) .25s backwards}
 
-  /* game icons row like cover bottom */
-  .game-row {
-    position: relative; z-index: 4; display: flex; align-items: center; gap: clamp(14px,3vw,32px); flex-wrap: wrap; justify-content: center;
-    padding: 14px 26px; border-radius: 16px; background: rgba(3,5,3,0.6); border: 1px solid var(--border); backdrop-filter: blur(10px);
-  }
-  .game-chip { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); transition: color .2s; cursor: pointer; }
-  .game-chip:hover { color: var(--green-bright); }
-  .game-chip svg { width: 17px; height: 17px; }
-  .chip-div { width: 1px; height: 16px; background: var(--border); }
+  .hero-sub{position:relative;z-index:4;font-size:clamp(15px,2.4vw,19px);color:var(--muted);max-width:560px;margin:0 auto 12px;line-height:1.7}
+  .hero-ticker{position:relative;z-index:4;font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--green-bright);margin-bottom:30px;letter-spacing:.06em}
+  .hero-cta{position:relative;z-index:4;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:30px}
 
-  /* TGE countdown */
-  .tge-strip { position: relative; z-index: 4; margin-top: 34px; display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap;
-    padding: 14px 20px; border-radius: 16px; background: rgba(7,11,7,0.7); border: 1px solid var(--border); backdrop-filter: blur(10px); }
-  .tge-label { font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); font-weight: 600; }
-  .tge-time { display: flex; gap: 8px; }
-  .tge-box { min-width: 54px; padding: 8px 10px; border-radius: 10px; text-align: center; background: rgba(74,255,60,0.07); border: 1px solid var(--border); }
-  .tge-num { font-family: 'Space Mono', monospace; font-size: 22px; font-weight: 700; color: var(--green-bright); }
-  .tge-unit { font-size: 9px; text-transform: uppercase; color: var(--muted-dim); letter-spacing: .1em; }
+  /* CA chip in hero */
+  .ca-chip{position:relative;z-index:4;display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:rgba(6,10,6,.8);border:1px solid var(--border-h);backdrop-filter:blur(10px);margin-bottom:34px;max-width:92vw}
+  .ca-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);flex-shrink:0}
+  .ca-val{font-family:'Space Mono',monospace;font-size:13px;color:var(--green-bright);overflow:hidden;text-overflow:ellipsis}
+  .ca-copy{cursor:pointer;color:var(--muted);flex-shrink:0;display:flex;transition:color .2s}
+  .ca-copy:hover{color:var(--green-bright)}
 
-  /* ══════ SECTIONS ══════ */
-  section { position: relative; z-index: 2; padding: 90px 24px; max-width: 1180px; margin: 0 auto; }
-  .sec-head { text-align: center; margin-bottom: 52px; }
-  .sec-kicker { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--green); margin-bottom: 13px; }
-  .sec-title { font-size: clamp(28px,5vw,44px); font-weight: 800; letter-spacing: -.02em; margin-bottom: 13px; }
-  .sec-desc { font-size: 16px; color: var(--muted); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+  .game-row{position:relative;z-index:4;display:flex;align-items:center;gap:clamp(14px,3vw,32px);flex-wrap:wrap;justify-content:center;padding:14px 26px;border-radius:16px;background:rgba(2,4,2,.6);border:1px solid var(--border);backdrop-filter:blur(10px)}
+  .game-chip{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:color .2s;cursor:pointer}
+  .game-chip:hover{color:var(--green-bright)}
+  .game-chip svg{width:17px;height:17px}
+  .chip-div{width:1px;height:16px;background:var(--border)}
 
-  .stats-bar { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; max-width: 1000px; margin: 0 auto; }
-  .stat { padding: 26px 20px; border-radius: 18px; text-align: center; background: var(--card); border: 1px solid var(--border); transition: all .25s; }
-  .stat:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: var(--glow); }
-  .stat-num { font-family: 'Space Mono', monospace; font-size: clamp(24px,4vw,34px); font-weight: 700; color: var(--green-bright); margin-bottom: 6px; }
-  .stat-lbl { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+  .scroll-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:3;color:var(--muted-dim);font-size:11px;letter-spacing:.1em;display:flex;flex-direction:column;align-items:center;gap:6px;animation:floaty 2s ease-in-out infinite}
+  @keyframes floaty{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
 
-  .games-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
-  .game { border-radius: 18px; overflow: hidden; cursor: pointer; background: var(--card); border: 1px solid var(--border); transition: all .3s cubic-bezier(.4,0,.2,1); }
-  .game:hover { transform: translateY(-6px); border-color: var(--border-hover); box-shadow: var(--glow), 0 24px 50px rgba(0,0,0,.6); }
-  .game-vis { height: 150px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: linear-gradient(160deg,#040804,#081008,#040804); }
-  .game-vis::after { content:''; position: absolute; inset: 0; opacity: 0; transition: opacity .3s; background: radial-gradient(ellipse at 50% 85%, rgba(74,255,60,0.22), transparent 70%); }
-  .game:hover .game-vis::after { opacity: 1; }
-  .game-emoji { font-size: 56px; z-index: 2; filter: drop-shadow(0 0 20px rgba(74,255,60,0.5)); transition: transform .3s; }
-  .game:hover .game-emoji { transform: scale(1.12); }
-  .game-body { padding: 16px 18px; display: flex; align-items: center; justify-content: space-between; }
-  .game-name { font-size: 16px; font-weight: 600; }
-  .game-meta { font-size: 11px; color: var(--muted); margin-top: 3px; display: flex; align-items: center; gap: 5px; }
-  .live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green-bright); box-shadow: 0 0 5px var(--green-bright); }
-  .rtp { font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: var(--green); background: rgba(74,255,60,0.09); padding: 4px 9px; border-radius: 7px; border: 1px solid var(--border); }
-  .soon-tag { position: absolute; top: 10px; right: 10px; z-index: 3; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; padding: 3px 8px; border-radius: 5px; background: rgba(74,255,60,0.13); color: var(--green-bright); border: 1px solid var(--border); }
+  /* ══ SECTIONS ══ */
+  section{position:relative;z-index:2;padding:90px 24px;max-width:1180px;margin:0 auto}
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:translateY(0)}
+  .sec-head{text-align:center;margin-bottom:52px}
+  .sec-kicker{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:13px}
+  .sec-title{font-size:clamp(28px,5vw,46px);font-weight:800;letter-spacing:-.02em;margin-bottom:13px}
+  .sec-title .g{background:linear-gradient(135deg,#DFFFDA,var(--green-bright),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .sec-desc{font-size:16px;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.7}
 
-  .feat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
-  .feat { padding: 30px 26px; border-radius: 20px; background: var(--card); border: 1px solid var(--border); transition: all .25s; }
-  .feat:hover { border-color: var(--border-hover); transform: translateY(-3px); }
-  .feat-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 18px; background: rgba(74,255,60,0.09); border: 1px solid var(--border); }
-  .feat-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
-  .feat-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1000px;margin:0 auto}
+  .stat{padding:28px 20px;border-radius:18px;text-align:center;background:var(--card);border:1px solid var(--border);transition:all .25s}
+  .stat:hover{border-color:var(--border-h);transform:translateY(-4px);box-shadow:var(--glow)}
+  .stat-num{font-family:'Space Mono',monospace;font-size:clamp(26px,4vw,36px);font-weight:700;color:var(--green-bright);margin-bottom:6px}
+  .stat-lbl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
 
-  .token-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
-    background: linear-gradient(135deg, rgba(7,11,7,0.9), rgba(0,40,2,0.25), rgba(7,11,7,0.9));
-    border: 1px solid var(--border-hover); border-radius: 28px; padding: 46px; }
-  .token-ca { font-family: 'Space Mono', monospace; font-size: 13px; word-break: break-all; background: rgba(74,255,60,0.06); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; color: var(--green-bright); margin: 18px 0; display: flex; align-items: center; gap: 10px; }
-  .copy-btn { margin-left: auto; cursor: pointer; color: var(--muted); flex-shrink: 0; }
-  .copy-btn:hover { color: var(--green-bright); }
-  .token-meta { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-top: 22px; }
-  .token-meta-item { padding: 14px 16px; border-radius: 12px; background: rgba(74,255,60,0.04); border: 1px solid var(--border); }
-  .token-meta-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 4px; }
-  .token-meta-val { font-size: 17px; font-weight: 700; color: var(--green-bright); font-family: 'Space Mono', monospace; }
-  .virtuals-card { text-align: center; padding: 40px 30px; background: rgba(3,5,3,0.6); border: 1px solid var(--border); border-radius: 22px; }
-  .virtuals-logo { font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
-  .virtuals-badge { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 14px; margin-bottom: 8px; background: rgba(74,255,60,0.09); border: 1px solid var(--border-hover); font-size: 22px; font-weight: 800; color: var(--green-bright); }
+  .games-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .game{border-radius:18px;overflow:hidden;cursor:pointer;background:var(--card);border:1px solid var(--border);transition:all .3s cubic-bezier(.4,0,.2,1)}
+  .game:hover{transform:translateY(-6px);border-color:var(--border-h);box-shadow:var(--glow),0 24px 50px rgba(0,0,0,.6)}
+  .game-vis{height:150px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(160deg,#040804,#081008,#040804)}
+  .game-vis::after{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s;background:radial-gradient(ellipse at 50% 85%,rgba(74,255,60,.22),transparent 70%)}
+  .game:hover .game-vis::after{opacity:1}
+  .game-emoji{font-size:56px;z-index:2;filter:drop-shadow(0 0 20px rgba(74,255,60,.5));transition:transform .3s}
+  .game:hover .game-emoji{transform:scale(1.14) rotate(-4deg)}
+  .game-body{padding:16px 18px;display:flex;align-items:center;justify-content:space-between}
+  .game-name{font-size:16px;font-weight:600}
+  .game-meta{font-size:11px;color:var(--muted);margin-top:3px;display:flex;align-items:center;gap:5px}
+  .live-dot{width:5px;height:5px;border-radius:50%;background:var(--green-bright);box-shadow:0 0 5px var(--green-bright)}
+  .rtp{font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:var(--green);background:rgba(74,255,60,.09);padding:4px 9px;border-radius:7px;border:1px solid var(--border)}
+  .soon-tag{position:absolute;top:10px;right:10px;z-index:3;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:3px 8px;border-radius:5px;background:rgba(74,255,60,.13);color:var(--green-bright);border:1px solid var(--border)}
 
-  .roadmap { max-width: 800px; margin: 0 auto; position: relative; }
-  .roadmap::before { content: ''; position: absolute; left: 24px; top: 12px; bottom: 12px; width: 2px; background: linear-gradient(to bottom, var(--green), transparent); }
-  .road-item { display: flex; gap: 22px; margin-bottom: 34px; position: relative; }
-  .road-dot { width: 50px; height: 50px; border-radius: 14px; flex-shrink: 0; z-index: 2; display: flex; align-items: center; justify-content: center; font-size: 22px; background: var(--card); border: 1px solid var(--border-hover); }
-  .road-item.done .road-dot { background: rgba(74,255,60,0.13); box-shadow: var(--glow); }
-  .road-phase { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: 5px; }
-  .road-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-  .road-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
-  .road-status { display: inline-block; margin-top: 8px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; padding: 3px 9px; border-radius: 5px; }
-  .status-live { background: rgba(74,255,60,0.14); color: var(--green-bright); }
-  .status-soon { background: rgba(180,255,170,0.08); color: var(--muted); }
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .feat{padding:30px 26px;border-radius:20px;background:var(--card);border:1px solid var(--border);transition:all .25s}
+  .feat:hover{border-color:var(--border-h);transform:translateY(-4px);box-shadow:var(--glow)}
+  .feat-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px;background:rgba(74,255,60,.09);border:1px solid var(--border)}
+  .feat-title{font-size:18px;font-weight:700;margin-bottom:10px}
+  .feat-desc{font-size:14px;color:var(--muted);line-height:1.7}
 
-  .final-cta { text-align: center; padding: 80px 40px; border-radius: 32px; position: relative; overflow: hidden;
-    background: linear-gradient(135deg, rgba(0,40,2,0.3), rgba(7,11,7,0.9), rgba(0,40,2,0.3)); border: 1px solid var(--border-hover); }
-  .final-cta h2 { font-size: clamp(30px,6vw,54px); font-weight: 800; letter-spacing: -.02em; margin-bottom: 16px; }
+  /* token */
+  .token-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;background:linear-gradient(135deg,rgba(6,10,6,.9),rgba(0,40,2,.28),rgba(6,10,6,.9));border:1px solid var(--border-h);border-radius:28px;padding:46px;position:relative;overflow:hidden}
+  .token-wrap::before{content:'';position:absolute;top:-40%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(74,255,60,.12),transparent 65%);pointer-events:none}
+  .token-ca{position:relative;font-family:'Space Mono',monospace;font-size:12.5px;word-break:break-all;background:rgba(74,255,60,.06);border:1px solid var(--border-h);border-radius:10px;padding:12px 14px;color:var(--green-bright);margin:18px 0;display:flex;align-items:center;gap:10px}
+  .copy-btn{margin-left:auto;cursor:pointer;color:var(--muted);flex-shrink:0;display:flex}
+  .copy-btn:hover{color:var(--green-bright)}
+  .token-meta{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px}
+  .token-meta-item{padding:14px 16px;border-radius:12px;background:rgba(74,255,60,.04);border:1px solid var(--border)}
+  .token-meta-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+  .token-meta-val{font-size:17px;font-weight:700;color:var(--green-bright);font-family:'Space Mono',monospace}
+  .virtuals-card{position:relative;text-align:center;padding:40px 30px;background:rgba(2,4,2,.6);border:1px solid var(--border);border-radius:22px}
+  .virtuals-logo{font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  .virtuals-badge{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:14px;margin-bottom:8px;background:rgba(74,255,60,.09);border:1px solid var(--border-h);font-size:22px;font-weight:800;color:var(--green-bright)}
 
-  footer { position: relative; z-index: 2; border-top: 1px solid var(--border); padding: 40px 24px; text-align: center; }
-  .foot-socials { display: flex; gap: 14px; justify-content: center; margin-bottom: 20px; }
-  .foot-social { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: var(--card); border: 1px solid var(--border); color: var(--muted); transition: all .2s; }
-  .foot-social:hover { color: var(--green-bright); border-color: var(--border-hover); transform: translateY(-2px); }
-  .foot-note { font-size: 13px; color: var(--muted-dim); }
-  .foot-disclaimer { font-size: 11px; color: var(--muted-dim); max-width: 600px; margin: 16px auto 0; line-height: 1.6; }
+  /* roadmap */
+  .roadmap{max-width:800px;margin:0 auto;position:relative}
+  .roadmap::before{content:'';position:absolute;left:24px;top:12px;bottom:12px;width:2px;background:linear-gradient(to bottom,var(--green),transparent)}
+  .road-item{display:flex;gap:22px;margin-bottom:34px;position:relative}
+  .road-dot{width:50px;height:50px;border-radius:14px;flex-shrink:0;z-index:2;display:flex;align-items:center;justify-content:center;font-size:22px;background:var(--card);border:1px solid var(--border-h)}
+  .road-item.done .road-dot{background:rgba(74,255,60,.13);box-shadow:var(--glow)}
+  .road-phase{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:5px}
+  .road-title{font-size:18px;font-weight:700;margin-bottom:6px}
+  .road-desc{font-size:14px;color:var(--muted);line-height:1.6}
+  .road-status{display:inline-block;margin-top:8px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:3px 9px;border-radius:5px}
+  .status-live{background:rgba(74,255,60,.14);color:var(--green-bright)}
+  .status-soon{background:rgba(180,255,170,.08);color:var(--muted)}
 
-  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); z-index: 500; padding: 12px 20px; border-radius: 12px; background: var(--card); border: 1px solid var(--border-hover); font-size: 13px; font-weight: 600; color: var(--green-bright); opacity: 0; transition: all .3s; box-shadow: var(--glow); }
-  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  .final-cta{text-align:center;padding:80px 40px;border-radius:32px;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(0,40,2,.3),rgba(6,10,6,.9),rgba(0,40,2,.3));border:1px solid var(--border-h)}
+  .final-cta h2{font-size:clamp(30px,6vw,56px);font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
+  .final-cta h2 .g{background:linear-gradient(135deg,#DFFFDA,var(--green-bright),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-  @media (max-width: 900px) {
-    .stats-bar { grid-template-columns: repeat(2,1fr); }
-    .games-grid { grid-template-columns: repeat(2,1fr); }
-    .feat-grid { grid-template-columns: 1fr; }
-    .token-wrap { grid-template-columns: 1fr; padding: 30px; }
-    .nav-links { display: none; }
-  }
-  @media (max-width: 560px) {
-    nav { padding: 12px 16px; }
-    section { padding: 62px 18px; }
-    .games-grid { grid-template-columns: repeat(2,1fr); gap: 12px; }
-    .game-vis { height: 120px; } .game-emoji { font-size: 44px; }
-    .hero-cta { flex-direction: column; width: 100%; } .hero-cta .btn { width: 100%; }
-    .rh-pill span { display: none; }
-    .wordmark { gap: 8px; }
-  }
+  footer{position:relative;z-index:2;border-top:1px solid var(--border);padding:40px 24px;text-align:center}
+  .foot-socials{display:flex;gap:14px;justify-content:center;margin-bottom:20px}
+  .foot-social{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--card);border:1px solid var(--border);color:var(--muted);transition:all .2s}
+  .foot-social:hover{color:var(--green-bright);border-color:var(--border-h);transform:translateY(-2px)}
+  .foot-note{font-size:13px;color:var(--muted-dim)}
+  .foot-disclaimer{font-size:11px;color:var(--muted-dim);max-width:600px;margin:16px auto 0;line-height:1.6}
+
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);z-index:500;padding:12px 20px;border-radius:12px;background:var(--card);border:1px solid var(--border-h);font-size:13px;font-weight:600;color:var(--green-bright);opacity:0;transition:all .3s;box-shadow:var(--glow)}
+  .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+  @media(max-width:900px){.stats-bar{grid-template-columns:repeat(2,1fr)}.games-grid{grid-template-columns:repeat(2,1fr)}.feat-grid{grid-template-columns:1fr}.token-wrap{grid-template-columns:1fr;padding:30px}.nav-links{display:none}}
+  @media(max-width:560px){nav{padding:12px 16px}section{padding:62px 18px}.games-grid{grid-template-columns:repeat(2,1fr);gap:12px}.game-vis{height:120px}.game-emoji{font-size:44px}.hero-cta{flex-direction:column;width:100%}.hero-cta .btn{width:100%}.rh-pill span{display:none}.wordmark{gap:8px}.ca-val{max-width:180px}}
 </style>
 </head>
 <body>
 
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <span>$VOID IS LIVE ON VIRTUALS.IO</span><span>BUILT ON ROBINHOOD</span><span>PROVABLY FAIR</span><span>WHERE ODDS COLLAPSE</span><span>LUCK LIVES HERE</span>
+    <span>$VOID IS LIVE ON VIRTUALS.IO</span><span>BUILT ON ROBINHOOD</span><span>PROVABLY FAIR</span><span>WHERE ODDS COLLAPSE</span><span>LUCK LIVES HERE</span>
+  </div>
+</div>
+
 <canvas id="cosmos"></canvas>
+<div class="grid-fx"></div>
 
-<!-- ══════ REUSABLE ORB LOGO (SVG matches uploaded logo) ══════ -->
-<svg width="0" height="0" style="position:absolute">
-  <defs>
-    <radialGradient id="orbCore" cx="50%" cy="52%" r="55%">
-      <stop offset="0%" stop-color="#0a0a0a"/>
-      <stop offset="70%" stop-color="#050505"/>
-      <stop offset="100%" stop-color="#000"/>
-    </radialGradient>
-    <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#7CFF6B"/>
-      <stop offset="45%" stop-color="#4AFF3C"/>
-      <stop offset="100%" stop-color="#0D8C05"/>
-    </linearGradient>
-    <filter id="ringBlur" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="3.5" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="eyeBlur" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="2" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-</svg>
-
+<svg width="0" height="0" style="position:absolute"><defs>
+  <radialGradient id="oc" cx="50%" cy="52%" r="55%"><stop offset="0%" stop-color="#0a0a0a"/><stop offset="70%" stop-color="#050505"/><stop offset="100%" stop-color="#000"/></radialGradient>
+  <linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7CFF6B"/><stop offset="45%" stop-color="#4AFF3C"/><stop offset="100%" stop-color="#0D8C05"/></linearGradient>
+  <filter id="rb" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="eb" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs></svg>
 <template id="orbTpl">
-  <svg class="void-orb" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- outer glow halo -->
+  <svg class="void-orb" viewBox="0 0 100 100" fill="none">
     <circle cx="50" cy="50" r="46" fill="#4AFF3C" opacity="0.06"/>
-    <!-- bright outer ring -->
-    <circle class="ring-outer" cx="50" cy="50" r="40" stroke="url(#ringGrad)" stroke-width="3.5" fill="none" filter="url(#ringBlur)"/>
-    <!-- dark sphere body -->
-    <circle cx="50" cy="50" r="36" fill="url(#orbCore)"/>
-    <!-- inner curved ring (the alien-hood arc) -->
+    <circle class="ring-rot" cx="50" cy="50" r="40" stroke="url(#rg)" stroke-width="3.5" fill="none" filter="url(#rb)" stroke-dasharray="185 65" style="transform-origin:center"/>
+    <circle cx="50" cy="50" r="36" fill="url(#oc)"/>
     <path d="M32 52 a18 18 0 1 1 36 0" stroke="#3fdd33" stroke-width="2.6" fill="none" opacity="0.85" stroke-linecap="round"/>
-    <path d="M34 54 a16 16 0 1 0 32 0" stroke="#1a5c14" stroke-width="2" fill="none" opacity="0.6"/>
-    <!-- two glowing eyes -->
-    <circle class="eye" cx="43" cy="50" r="3.4" fill="#B9FFB0" filter="url(#eyeBlur)"/>
-    <circle class="eye" cx="57" cy="50" r="3.4" fill="#B9FFB0" filter="url(#eyeBlur)"/>
+    <circle class="eye" cx="43" cy="50" r="3.4" fill="#B9FFB0" filter="url(#eb)"/>
+    <circle class="eye" cx="57" cy="50" r="3.4" fill="#B9FFB0" filter="url(#eb)"/>
   </svg>
 </template>
+<style>
+  .ring-rot{animation:ringSpin 14s linear infinite}
+  @keyframes ringSpin{to{transform:rotate(360deg)}}
+  .eye{animation:eyeGlow 2.6s ease-in-out infinite}
+  @keyframes eyeGlow{0%,100%{opacity:.9}50%{opacity:1;filter:brightness(1.4)}}
+  .void-orb{filter:drop-shadow(0 0 20px rgba(74,255,60,.35))}
+</style>
 
-<!-- ══════ NAV ══════ -->
+<!-- NAV -->
 <nav>
-  <div class="logo">
-    <span class="orb-mount" style="width:34px;height:34px;display:block;"></span>
-    <span class="logo-text">VOID</span>
-  </div>
+  <div class="logo"><span class="orb-mount" style="width:34px;height:34px;display:block"></span><span class="logo-text">VOID</span></div>
   <div class="nav-links">
-    <a href="#games">Games</a>
-    <a href="#token">$VOID</a>
-    <a href="#fairness">Fairness</a>
-    <a href="#roadmap">Roadmap</a>
+    <a href="#games">Games</a><a href="#token">$VOID</a><a href="#fairness">Fairness</a><a href="#roadmap">Roadmap</a>
   </div>
   <div class="nav-right">
     <div class="rh-pill">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 20c0-8 6-14 14-14v3c-6 0-10 4-10 11H4z" fill="#4AFF3C"/><path d="M8 20c0-5 4-8 9-8v2.5c-3.5 0-6.5 2-6.5 5.5H8z" fill="#7CFF6B"/></svg>
       <span>Built on Robinhood</span>
     </div>
-    <a href="#token" class="btn btn-primary" style="padding:9px 18px;">Buy $VOID</a>
+    <a href="https://app.virtuals.io/virtuals/118308" target="_blank" class="btn btn-primary" style="padding:9px 18px">Buy $VOID</a>
   </div>
 </nav>
 
-<!-- ══════ HERO ══════ -->
+<!-- HERO -->
 <header class="hero">
-  <div class="neb neb-1"></div>
-  <div class="neb neb-2"></div>
-  <div class="neb neb-3"></div>
+  <div class="neb neb-1"></div><div class="neb neb-2"></div><div class="neb neb-3"></div>
+  <div class="hero-tagline-l"><div class="tl-big">Enter the Void</div><div class="tl-sm">Luck Lives Here</div></div>
+  <div class="hero-tagline-r"><div class="tl-big tl-green">Built on Robinhood</div><div class="tl-sm">Beyond Probability</div></div>
 
-  <div class="hero-tagline-l">
-    <div class="tl-big">Enter the Void</div>
-    <div class="tl-sm">Luck Lives Here</div>
-  </div>
-  <div class="hero-tagline-r">
-    <div class="tl-big tl-green">Built on Robinhood</div>
-    <div class="tl-sm">Beyond Probability</div>
-  </div>
-
-  <div class="launch-badge"><span class="bdot"></span>Launching Today · Virtuals.io</div>
+  <div class="live-badge"><span class="bdot"></span>$VOID Live on Virtuals.io</div>
 
   <div class="wordmark">
     <span class="wm-letter">V</span>
@@ -350,50 +263,37 @@
   <p class="hero-sub">The first provably-fair Web3 casino built on Robinhood. Every bet verifiable on-chain. No accounts — connect and play.</p>
   <div class="hero-ticker">$VOID · Where Odds Collapse</div>
 
+  <div class="ca-chip">
+    <span class="ca-label">CA</span>
+    <span class="ca-val" id="heroCA">0xb2400A5a96792cF09Ea157605D89b190461F2247</span>
+    <span class="ca-copy" onclick="copyCA()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+    </span>
+  </div>
+
   <div class="hero-cta">
-    <a href="#token" class="btn btn-primary">
+    <a href="https://app.virtuals.io/virtuals/118308" target="_blank" class="btn btn-primary">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20M2 12h20"/></svg>
       Buy $VOID on Virtuals
     </a>
     <a href="#games" class="btn btn-ghost">Explore Games →</a>
   </div>
 
-  <!-- game chips row (matches cover) -->
   <div class="game-row">
-    <div class="game-chip">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-      Crash
-    </div>
+    <div class="game-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>Crash</div>
     <div class="chip-div"></div>
-    <div class="game-chip">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      Mines
-    </div>
+    <div class="game-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Mines</div>
     <div class="chip-div"></div>
-    <div class="game-chip">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><circle cx="6" cy="15" r="2"/><circle cx="18" cy="15" r="2"/><circle cx="12" cy="19" r="2"/></svg>
-      Plinko
-    </div>
+    <div class="game-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><circle cx="6" cy="15" r="2"/><circle cx="18" cy="15" r="2"/><circle cx="12" cy="19" r="2"/></svg>Plinko</div>
     <div class="chip-div"></div>
-    <div class="game-chip">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l7-7 7 7-7 7z"/><path d="M9 12l3-3 3 3-3 3z" fill="currentColor"/></svg>
-      Dino
-    </div>
+    <div class="game-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l7-7 7 7-7 7z"/></svg>Dino</div>
   </div>
 
-  <div class="tge-strip">
-    <span class="tge-label">Token Launch</span>
-    <div class="tge-time">
-      <div class="tge-box"><div class="tge-num" id="cd-h">00</div><div class="tge-unit">Hrs</div></div>
-      <div class="tge-box"><div class="tge-num" id="cd-m">00</div><div class="tge-unit">Min</div></div>
-      <div class="tge-box"><div class="tge-num" id="cd-s">00</div><div class="tge-unit">Sec</div></div>
-    </div>
-    <span class="tge-label" style="color:var(--green-bright);">→ Site live after TGE</span>
-  </div>
+  <div class="scroll-hint"><span>SCROLL</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
 </header>
 
-<!-- ══════ STATS ══════ -->
-<section style="padding-top:40px;">
+<!-- STATS -->
+<section class="reveal" style="padding-top:40px">
   <div class="stats-bar">
     <div class="stat"><div class="stat-num">4</div><div class="stat-lbl">Provably Fair Games</div></div>
     <div class="stat"><div class="stat-num">99%</div><div class="stat-lbl">RTP Average</div></div>
@@ -402,38 +302,26 @@
   </div>
 </section>
 
-<!-- ══════ GAMES ══════ -->
-<section id="games">
+<!-- GAMES -->
+<section id="games" class="reveal">
   <div class="sec-head">
     <span class="sec-kicker">VOID Originals</span>
-    <h2 class="sec-title">Four Ways to Collapse the Odds</h2>
+    <h2 class="sec-title">Four Ways to <span class="g">Collapse the Odds</span></h2>
     <p class="sec-desc">Every game runs on a backend-authoritative provably-fair engine. Cryptographically verifiable — never trust, always verify.</p>
   </div>
   <div class="games-grid">
-    <div class="game">
-      <div class="game-vis"><span class="game-emoji">📈</span></div>
-      <div class="game-body"><div><div class="game-name">Crash</div><div class="game-meta"><span class="live-dot"></span>Live at launch</div></div><div class="rtp">99%</div></div>
-    </div>
-    <div class="game">
-      <div class="game-vis"><span class="soon-tag">Soon</span><span class="game-emoji">💣</span></div>
-      <div class="game-body"><div><div class="game-name">Mines</div><div class="game-meta"><span class="live-dot"></span>Phase 2</div></div><div class="rtp">99%</div></div>
-    </div>
-    <div class="game">
-      <div class="game-vis"><span class="soon-tag">Soon</span><span class="game-emoji">🎯</span></div>
-      <div class="game-body"><div><div class="game-name">Plinko</div><div class="game-meta"><span class="live-dot"></span>Phase 2</div></div><div class="rtp">99%</div></div>
-    </div>
-    <div class="game">
-      <div class="game-vis"><span class="soon-tag">Soon</span><span class="game-emoji">🦕</span></div>
-      <div class="game-body"><div><div class="game-name">Dino</div><div class="game-meta"><span class="live-dot"></span>Phase 3</div></div><div class="rtp">99%</div></div>
-    </div>
+    <div class="game"><div class="game-vis"><span class="game-emoji">📈</span></div><div class="game-body"><div><div class="game-name">Crash</div><div class="game-meta"><span class="live-dot"></span>Live at launch</div></div><div class="rtp">99%</div></div></div>
+    <div class="game"><div class="game-vis"><span class="soon-tag">Soon</span><span class="game-emoji">💣</span></div><div class="game-body"><div><div class="game-name">Mines</div><div class="game-meta"><span class="live-dot"></span>Phase 2</div></div><div class="rtp">99%</div></div></div>
+    <div class="game"><div class="game-vis"><span class="soon-tag">Soon</span><span class="game-emoji">🎯</span></div><div class="game-body"><div><div class="game-name">Plinko</div><div class="game-meta"><span class="live-dot"></span>Phase 2</div></div><div class="rtp">99%</div></div></div>
+    <div class="game"><div class="game-vis"><span class="soon-tag">Soon</span><span class="game-emoji">🦕</span></div><div class="game-body"><div><div class="game-name">Dino</div><div class="game-meta"><span class="live-dot"></span>Phase 3</div></div><div class="rtp">99%</div></div></div>
   </div>
 </section>
 
-<!-- ══════ FEATURES ══════ -->
-<section id="fairness">
+<!-- FEATURES -->
+<section id="fairness" class="reveal">
   <div class="sec-head">
     <span class="sec-kicker">Why VOID</span>
-    <h2 class="sec-title">Built Different</h2>
+    <h2 class="sec-title">Built <span class="g">Different</span></h2>
     <p class="sec-desc">This isn't a casino that happens to be Web3. It's Web3 that happens to be a casino.</p>
   </div>
   <div class="feat-grid">
@@ -446,120 +334,108 @@
   </div>
 </section>
 
-<!-- ══════ TOKEN ══════ -->
-<section id="token">
+<!-- TOKEN -->
+<section id="token" class="reveal">
   <div class="sec-head">
     <span class="sec-kicker">The Token</span>
-    <h2 class="sec-title">$VOID</h2>
-    <p class="sec-desc">The native token powering the VOID ecosystem. Launching today on Virtuals.io.</p>
+    <h2 class="sec-title"><span class="g">$VOID</span></h2>
+    <p class="sec-desc">The native token powering the VOID ecosystem. Live now on Virtuals.io.</p>
   </div>
   <div class="token-wrap">
     <div>
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px;">
-        <span class="orb-mount" style="width:52px;height:52px;display:block;"></span>
-        <div><div style="font-size:26px;font-weight:800;">$VOID</div><div style="font-size:13px;color:var(--muted);">The house token</div></div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px;position:relative">
+        <span class="orb-mount" style="width:52px;height:52px;display:block"></span>
+        <div><div style="font-size:26px;font-weight:800">$VOID</div><div style="font-size:13px;color:var(--muted)">The house token</div></div>
       </div>
-      <p style="font-size:15px;color:var(--muted);line-height:1.7;margin-top:14px;">$VOID captures the value flowing through every game — rakeback, VIP rewards, and tournament pools all settle in $VOID. Launching via Virtuals Protocol on Robinhood.</p>
+      <p style="font-size:15px;color:var(--muted);line-height:1.7;margin-top:14px;position:relative">$VOID captures the value flowing through every game — rakeback, VIP rewards, and tournament pools all settle in $VOID. Live now via Virtuals Protocol on Robinhood.</p>
       <div class="token-ca">
-        <span id="ca-text">CA revealed at TGE — launching today</span>
+        <span id="tokenCA">0xb2400A5a96792cF09Ea157605D89b190461F2247</span>
         <span class="copy-btn" onclick="copyCA()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
       </div>
       <div class="token-meta">
         <div class="token-meta-item"><div class="token-meta-lbl">Network</div><div class="token-meta-val">Robinhood</div></div>
         <div class="token-meta-item"><div class="token-meta-lbl">Launchpad</div><div class="token-meta-val">Virtuals.io</div></div>
         <div class="token-meta-item"><div class="token-meta-lbl">Ticker</div><div class="token-meta-val">$VOID</div></div>
-        <div class="token-meta-item"><div class="token-meta-lbl">Launch</div><div class="token-meta-val">Today</div></div>
+        <div class="token-meta-item"><div class="token-meta-lbl">Status</div><div class="token-meta-val">🟢 Live</div></div>
       </div>
     </div>
     <div class="virtuals-card">
-      <div class="virtuals-logo">Launching On</div>
+      <div class="virtuals-logo">Live On</div>
       <div class="virtuals-badge">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#4AFF3C" opacity="0.2"/><path d="M8 12l3 3 5-6" stroke="#7CFF6B" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Virtuals.io
       </div>
-      <p style="font-size:13px;color:var(--muted);margin:16px 0 24px;line-height:1.6;">The autonomous agent launchpad on Robinhood. Fair launch, transparent, community-first.</p>
-      <a href="#" class="btn btn-primary" style="width:100%;" onclick="showToast('Live at TGE — launching today!');return false;">Buy $VOID at Launch</a>
-      <div style="font-size:11px;color:var(--muted-dim);margin-top:14px;">Button activates the moment TGE goes live</div>
+      <p style="font-size:13px;color:var(--muted);margin:16px 0 24px;line-height:1.6">The autonomous agent launchpad on Robinhood. Fair launch, transparent, community-first.</p>
+      <a href="https://app.virtuals.io/virtuals/118308" target="_blank" class="btn btn-primary" style="width:100%">Buy $VOID Now →</a>
+      <div style="font-size:11px;color:var(--muted-dim);margin-top:14px">app.virtuals.io/virtuals/118308</div>
     </div>
   </div>
 </section>
 
-<!-- ══════ ROADMAP ══════ -->
-<section id="roadmap">
+<!-- ROADMAP -->
+<section id="roadmap" class="reveal">
   <div class="sec-head">
     <span class="sec-kicker">The Path</span>
-    <h2 class="sec-title">Roadmap</h2>
-    <p class="sec-desc">Website and app go live the moment $VOID successfully launches.</p>
+    <h2 class="sec-title"><span class="g">Roadmap</span></h2>
+    <p class="sec-desc">$VOID is live. Crash launches next — the rest of the void unfolds from here.</p>
   </div>
   <div class="roadmap">
-    <div class="road-item done"><div class="road-dot">🚀</div><div><div class="road-phase">Phase 0 · Today</div><div class="road-title">Token Generation Event</div><div class="road-desc">$VOID launches on Virtuals.io. Fair launch on Robinhood. Website + Crash go live immediately after successful TGE.</div><span class="road-status status-live">Launching Now</span></div></div>
-    <div class="road-item done"><div class="road-dot">📈</div><div><div class="road-phase">Phase 1 · Launch</div><div class="road-title">Crash Goes Live</div><div class="road-desc">The flagship game. Real-time multiplayer crash with provably-fair results, auto-cashout, and live bet feed.</div><span class="road-status status-live">At TGE</span></div></div>
-    <div class="road-item"><div class="road-dot">💣</div><div><div class="road-phase">Phase 2 · Weeks After</div><div class="road-title">Mines + Plinko</div><div class="road-desc">Two more provably-fair originals. Configurable difficulty, instant cashout, VOID-green theming throughout.</div><span class="road-status status-soon">Coming</span></div></div>
+    <div class="road-item done"><div class="road-dot">🚀</div><div><div class="road-phase">Phase 0 · Done</div><div class="road-title">Token Generation Event</div><div class="road-desc">$VOID launched on Virtuals.io. Fair launch on Robinhood. CA is live and tradeable now.</div><span class="road-status status-live">Live Now</span></div></div>
+    <div class="road-item done"><div class="road-dot">📈</div><div><div class="road-phase">Phase 1 · Launching</div><div class="road-title">Crash Goes Live</div><div class="road-desc">The flagship game. Real-time multiplayer crash with provably-fair results, auto-cashout, and live bet feed.</div><span class="road-status status-live">Next</span></div></div>
+    <div class="road-item"><div class="road-dot">💣</div><div><div class="road-phase">Phase 2 · Soon</div><div class="road-title">Mines + Plinko</div><div class="road-desc">Two more provably-fair originals. Configurable difficulty, instant cashout, VOID-green theming throughout.</div><span class="road-status status-soon">Coming</span></div></div>
     <div class="road-item"><div class="road-dot">🏆</div><div><div class="road-phase">Phase 3 · Expansion</div><div class="road-title">Dino, Tournaments & VIP</div><div class="road-desc">Dino runner, weekly tournaments with $VOID prize pools, VIP tiers, rakeback, and the leaderboard economy.</div><span class="road-status status-soon">Planned</span></div></div>
     <div class="road-item"><div class="road-dot">🌌</div><div><div class="road-phase">Phase 4 · The Ecosystem</div><div class="road-title">PvP, Prediction Markets & AI Agents</div><div class="road-desc">VOID becomes more than a casino — social gambling, PvP duels, prediction markets, autonomous agents playing the void.</div><span class="road-status status-soon">Vision</span></div></div>
   </div>
 </section>
 
-<!-- ══════ FINAL CTA ══════ -->
-<section>
+<!-- FINAL CTA -->
+<section class="reveal">
   <div class="final-cta">
-    <div class="neb neb-3" style="top:-30%;right:20%;opacity:0.4;"></div>
-    <div class="orb-mount" style="width:80px;height:80px;margin:0 auto 24px;position:relative;z-index:2;"></div>
-    <h2 style="position:relative;z-index:2;">Ready to enter the Void?</h2>
-    <p style="position:relative;z-index:2;font-size:17px;color:var(--muted);max-width:480px;margin:0 auto 32px;">$VOID launches today on Virtuals.io. Site and games go live the moment the token is out.</p>
-    <div style="position:relative;z-index:2;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-      <a href="#token" class="btn btn-primary">Buy $VOID</a>
+    <div class="neb neb-3" style="top:-30%;right:20%;opacity:.4"></div>
+    <div class="orb-mount" style="width:80px;height:80px;margin:0 auto 24px;position:relative;z-index:2"></div>
+    <h2 style="position:relative;z-index:2">Ready to enter the <span class="g">Void</span>?</h2>
+    <p style="position:relative;z-index:2;font-size:17px;color:var(--muted);max-width:480px;margin:0 auto 32px">$VOID is live on Virtuals.io. Trade now, and get ready — the games are coming.</p>
+    <div style="position:relative;z-index:2;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="https://app.virtuals.io/virtuals/118308" target="_blank" class="btn btn-primary">Buy $VOID</a>
       <a href="https://x.com/voidotxyz" target="_blank" class="btn btn-ghost">Follow @voidotxyz</a>
     </div>
   </div>
 </section>
 
-<!-- ══════ FOOTER ══════ -->
+<!-- FOOTER -->
 <footer>
-  <div class="logo" style="justify-content:center;margin-bottom:20px;">
-    <span class="orb-mount" style="width:30px;height:30px;display:block;"></span>
-    <span class="logo-text">VOID</span>
-  </div>
+  <div class="logo" style="justify-content:center;margin-bottom:20px"><span class="orb-mount" style="width:30px;height:30px;display:block"></span><span class="logo-text">VOID</span></div>
   <div class="foot-socials">
-    <a class="foot-social" href="https://x.com/voidotxyz" target="_blank" title="X / Twitter">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.58-6.63 7.58H.49l8.6-9.83L0 1.15h7.59l5.24 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z"/></svg>
-    </a>
-    <a class="foot-social" href="#" title="Virtuals">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
-    </a>
+    <a class="foot-social" href="https://x.com/voidotxyz" target="_blank" title="X"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.58-6.63 7.58H.49l8.6-9.83L0 1.15h7.59l5.24 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z"/></svg></a>
+    <a class="foot-social" href="https://app.virtuals.io/virtuals/118308" target="_blank" title="Virtuals"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></a>
   </div>
   <div class="foot-note">© 2026 VOID · Built on Robinhood · Where Odds Collapse ■</div>
-  <div class="foot-disclaimer">VOID is a provably-fair gaming platform. $VOID is a utility token launching via Virtuals.io. Gambling involves risk — play responsibly. This site goes fully live after a successful token launch. Follow <a href="https://x.com/voidotxyz" target="_blank" style="color:var(--green-bright);">@voidotxyz</a> for the CA drop.</div>
+  <div class="foot-disclaimer">VOID is a provably-fair gaming platform. $VOID is a utility token live on Virtuals.io. CA: 0xb2400A5a96792cF09Ea157605D89b190461F2247. Gambling involves risk — play responsibly. Follow <a href="https://x.com/voidotxyz" target="_blank" style="color:var(--green-bright)">@voidotxyz</a> for updates.</div>
 </footer>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// mount orb logo everywhere
-(function(){
-  const tpl = document.getElementById('orbTpl');
-  document.querySelectorAll('.orb-mount').forEach(m => {
-    m.appendChild(tpl.content.cloneNode(true));
-  });
-})();
+const tpl=document.getElementById('orbTpl');
+document.querySelectorAll('.orb-mount').forEach(m=>m.appendChild(tpl.content.cloneNode(true)));
 
-// cosmic particles (green)
-(function(){
-  const c=document.getElementById('cosmos'),ctx=c.getContext('2d');let W,H,parts=[];
-  function rs(){W=c.width=innerWidth;H=c.height=innerHeight;}
-  function mk(){const o=Math.random()*0.5+0.1,r=Math.random();return{x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+0.3,vx:(Math.random()-0.5)*0.14,vy:(Math.random()-0.5)*0.14,o,p:Math.random()*6.28,ps:Math.random()*0.02+0.005,col:r>0.7?`rgba(74,255,60,${o})`:r>0.4?`rgba(124,255,107,${o*0.6})`:`rgba(255,255,255,${o*0.35})`};}
-  function neb(){let g=ctx.createRadialGradient(W*0.8,H*0.25,0,W*0.8,H*0.25,W*0.35);g.addColorStop(0,'rgba(74,255,60,0.05)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);let g2=ctx.createRadialGradient(W*0.15,H*0.7,0,W*0.15,H*0.7,W*0.3);g2.addColorStop(0,'rgba(34,194,23,0.04)');g2.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g2;ctx.fillRect(0,0,W,H);}
-  rs();for(let i=0;i<110;i++)parts.push(mk());
-  function loop(){ctx.clearRect(0,0,W,H);neb();for(const p of parts){p.x+=p.vx;p.y+=p.vy;p.p+=p.ps;if(p.x<0||p.x>W||p.y<0||p.y>H)Object.assign(p,mk());const a=0.5+0.5*Math.sin(p.p);ctx.beginPath();ctx.arc(p.x,p.y,p.r*a,0,6.28);ctx.fillStyle=p.col;ctx.fill();}requestAnimationFrame(loop);}
-  loop();addEventListener('resize',rs);
-})();
+// particles
+(function(){const c=document.getElementById('cosmos'),ctx=c.getContext('2d');let W,H,ps=[];
+function rs(){W=c.width=innerWidth;H=c.height=innerHeight}
+function mk(){const o=Math.random()*.5+.1,r=Math.random();return{x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.3,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.14,o,p:Math.random()*6.28,ps:Math.random()*.02+.005,col:r>.7?'rgba(74,255,60,'+o+')':r>.4?'rgba(124,255,107,'+(o*.6)+')':'rgba(255,255,255,'+(o*.35)+')'}}
+function neb(){let g=ctx.createRadialGradient(W*.8,H*.25,0,W*.8,H*.25,W*.35);g.addColorStop(0,'rgba(74,255,60,.05)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);let g2=ctx.createRadialGradient(W*.15,H*.7,0,W*.15,H*.7,W*.3);g2.addColorStop(0,'rgba(34,194,23,.04)');g2.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g2;ctx.fillRect(0,0,W,H)}
+rs();for(let i=0;i<110;i++)ps.push(mk());
+function loop(){ctx.clearRect(0,0,W,H);neb();for(const p of ps){p.x+=p.vx;p.y+=p.vy;p.p+=p.ps;if(p.x<0||p.x>W||p.y<0||p.y>H)Object.assign(p,mk());const a=.5+.5*Math.sin(p.p);ctx.beginPath();ctx.arc(p.x,p.y,p.r*a,0,6.28);ctx.fillStyle=p.col;ctx.fill()}requestAnimationFrame(loop)}
+loop();addEventListener('resize',rs)})();
 
-// countdown to end of today
-(function(){const end=new Date();end.setHours(23,59,59,0);function t(){const n=new Date(),d=Math.max(0,end-n);document.getElementById('cd-h').textContent=String(Math.floor(d/3.6e6)).padStart(2,'0');document.getElementById('cd-m').textContent=String(Math.floor(d%3.6e6/6e4)).padStart(2,'0');document.getElementById('cd-s').textContent=String(Math.floor(d%6e4/1000)).padStart(2,'0');}t();setInterval(t,1000);})();
+// scroll reveal
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(window._t);window._t=setTimeout(()=>t.classList.remove('show'),2800);}
-function copyCA(){showToast('CA drops at TGE — follow @voidotxyz');}
-console.log('%cVOID · Built on Robinhood','color:#4AFF3C;font-size:20px;font-weight:800;');
+// toast + copy CA
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(window._t);window._t=setTimeout(()=>t.classList.remove('show'),2600)}
+function copyCA(){const ca='0xb2400A5a96792cF09Ea157605D89b190461F2247';navigator.clipboard.writeText(ca).then(()=>showToast('✓ Contract address copied')).catch(()=>showToast('CA: '+ca))}
+console.log('%cVOID · Built on Robinhood · $VOID LIVE','color:#4AFF3C;font-size:18px;font-weight:800');
 </script>
 </body>
 </html>
